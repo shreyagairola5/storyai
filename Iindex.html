@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The Space Between Us</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #0f1115;
+			--panel: rgba(255, 255, 255, 0.04);
+			--text: #e8ebf0;
+			--muted: #b7c0cf;
+			--accent: #7fb4ff;
+			--line: rgba(255, 255, 255, 0.08);
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			background: radial-gradient(circle at 20% 20%, rgba(127, 180, 255, 0.08), transparent 30%),
+									radial-gradient(circle at 80% 0%, rgba(255, 182, 193, 0.08), transparent 32%),
+									linear-gradient(180deg, #0b0c11 0%, #11131a 40%, #0d0f13 100%);
+			color: var(--text);
+			font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+			line-height: 1.7;
+			display: flex;
+			flex-direction: column;
+		}
+
+		main {
+			width: min(1200px, 92vw);
+			margin: 0 auto 80px;
+			padding: 40px 0 0;
+		}
+
+		h1, h2, h3 {
+			font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+			font-weight: 600;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		section {
+			margin: 28px 0 60px;
+			padding: 32px;
+			background: var(--panel);
+			border: 1px solid var(--line);
+			border-radius: 18px;
+			backdrop-filter: blur(8px);
+			box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+		}
+
+		.label {
+			font-size: 12px;
+			letter-spacing: 0.2em;
+			color: var(--muted);
+			text-transform: uppercase;
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		/* Section 1 */
+		.process-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 28px;
+			align-items: stretch;
+		}
+
+		.frame {
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			overflow: hidden;
+			background: rgba(255,255,255,0.02);
+		}
+
+		.frame img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			filter: saturate(0.9);
+		}
+
+		.prompt-box {
+			padding: 18px 20px;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+		}
+
+		.prompt-box code {
+			white-space: pre-wrap;
+			font-family: 'Manrope', monospace;
+			color: var(--text);
+			background: rgba(255,255,255,0.03);
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			padding: 14px;
+			line-height: 1.6;
+		}
+
+		/* Section 2 */
+		.title-transition {
+			text-align: center;
+			padding: 120px 0;
+			background: linear-gradient(145deg, rgba(127, 180, 255, 0.08), rgba(255, 255, 255, 0));
+			border-radius: 24px;
+			border: 1px solid var(--line);
+		}
+
+		.title-transition h2 {
+			margin: 0;
+			font-size: clamp(32px, 6vw, 64px);
+			letter-spacing: 0.16em;
+		}
+
+		/* Section 3 */
+		.cover {
+			overflow: hidden;
+			border-radius: 18px;
+			border: 1px solid var(--line);
+			display: grid;
+			grid-template-columns: minmax(320px, 1.35fr) minmax(260px, 1fr);
+			align-items: stretch;
+			background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+		}
+
+		.cover-pane {
+			position: relative;
+			background: rgba(10, 12, 16, 0.6);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 18px;
+		}
+
+		.cover-visual {
+			border-right: 1px solid var(--line);
+		}
+
+		.cover-image {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			display: block;
+			background: #0b0d12;
+		}
+
+		.cover-title {
+			text-align: center;
+			font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+			font-size: clamp(26px, 4vw, 48px);
+			letter-spacing: 0.32em;
+			text-transform: uppercase;
+			line-height: 1.4;
+			color: var(--text);
+		}
+
+		/* Section 4 */
+		.story {
+			display: grid;
+			gap: 24px;
+		}
+
+		.story p {
+			margin: 0 0 14px;
+			color: #dbe1ed;
+			font-size: 17px;
+		}
+
+		/* Audio controls */
+		.audio-controls {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			padding: 14px 16px;
+			background: rgba(255,255,255,0.03);
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			width: fit-content;
+		}
+
+		.audio-controls button, .audio-controls input[type="range"] {
+			appearance: none;
+			border: none;
+			border-radius: 10px;
+			padding: 10px 14px;
+			background: rgba(127, 180, 255, 0.14);
+			color: var(--text);
+			font-weight: 600;
+			letter-spacing: 0.08em;
+			cursor: pointer;
+			transition: background 0.2s ease;
+		}
+
+		.audio-controls button:hover {
+			background: rgba(127, 180, 255, 0.24);
+		}
+
+		.audio-controls input[type="range"] {
+			width: 120px;
+			height: 6px;
+			padding: 0;
+			background: var(--line);
+		}
+
+		.audio-controls input[type="range"]::-webkit-slider-thumb {
+			appearance: none;
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			background: var(--accent);
+			box-shadow: 0 0 0 4px rgba(127, 180, 255, 0.2);
+		}
+
+		/* Music Icon Header */
+		.music-header {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			z-index: 21;
+		}
+
+		.music-toggle {
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+			border: 1px solid var(--line);
+			background: rgba(255, 255, 255, 0.08);
+			color: var(--accent);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-size: 20px;
+			backdrop-filter: blur(8px);
+		}
+
+		.music-toggle:hover {
+			background: rgba(127, 180, 255, 0.15);
+			box-shadow: 0 0 16px rgba(127, 180, 255, 0.2);
+		}
+
+		/* WhatsApp-style narration player */
+		.narration-player {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 12px 16px;
+			background: rgba(255, 255, 255, 0.06);
+			border: 1px solid var(--line);
+			border-radius: 24px;
+			width: fit-content;
+			margin-top: 14px;
+		}
+
+		.narration-play-btn {
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			border: none;
+			background: rgba(127, 180, 255, 0.2);
+			color: var(--accent);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			transition: background 0.2s ease;
+			flex-shrink: 0;
+			font-size: 14px;
+		}
+
+		.narration-play-btn:hover {
+			background: rgba(127, 180, 255, 0.35);
+		}
+
+		.narration-progress-container {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			min-width: 120px;
+		}
+
+		.narration-progress-bar {
+			flex: 1;
+			height: 3px;
+			border-radius: 2px;
+			background: var(--line);
+			cursor: pointer;
+			position: relative;
+		}
+
+		.narration-progress-fill {
+			height: 100%;
+			background: var(--accent);
+			border-radius: 2px;
+			width: 0%;
+			transition: width 0.1s linear;
+		}
+
+		.narration-time {
+			font-size: 11px;
+			color: var(--muted);
+			white-space: nowrap;
+			letter-spacing: 0.05em;
+		}
+
+		@media (max-width: 700px) {
+			section { padding: 24px; }
+			.title-transition { padding: 80px 18px; }
+			.ambient-bar { width: calc(100% - 40px); }
+		}
+	</style>
+</head>
+<body>
+	<div class="music-header">
+		<button class="music-toggle" id="music-toggle" aria-label="Toggle background music">♫</button>
+	</div>
+
+	<main>
+		<section aria-labelledby="process-title">
+			<span class="label">1 · Original Image & Prompt</span>
+			<div class="process-grid">
+				<div class="frame" aria-label="Original image">
+					<img src="og.png" alt="Original reference image" loading="lazy">
+				</div>
+				<div class="prompt-box frame" aria-label="Prompt">
+					<strong style="letter-spacing:0.08em; color:var(--muted);">AI Prompt</strong>
+					<code>generate an image of a group of many people ,both men and women, facing front with a serious expression on their face, they are of different ethnicity aged between 18-50 dressed in normal casual western clothes</code>
+				</div>
+			</div>
+		</section>
+
+		<section class="title-transition" aria-labelledby="title-transition">
+			<h2 id="title-transition">The Space Between Us</h2>
+		</section>
+
+		<section aria-labelledby="cover-title">
+			<span class="label">3 · Cover</span>
+			<div class="cover" role="group" aria-labelledby="cover-title">
+				<div class="cover-pane cover-visual">
+					<img class="cover-image" src="c.png" alt="Cover art for The Space Between Us" loading="lazy">
+				</div>
+				<div class="cover-pane">
+					<div class="cover-title" id="cover-title">THE SPACE BETWEEN US</div>
+				</div>
+			</div>
+		</section>
+
+		<section aria-labelledby="story-title">
+			<span class="label">4 · Story & Narration</span>
+			<div class="story">
+				<h3 id="story-title">Story</h3>
+				<p>They were asked to stand in rows, facing forward, as if for a photograph. No instructions beyond that. No smiles. No slogans. Just: <em>stand here</em>.</p>
+				<p>At first, it felt awkward. A man in his forties adjusted his sleeves, wondering if he looked out of place among people half his age. A girl barely out of college folded her hands behind her back, rehearsing excuses in her head for why she shouldn't be here. Someone in the back wanted to leave. Someone in the front had almost not come.</p>
+				<p>None of them knew each other's names.</p>
+				<p>What they did know—quietly, instinctively—was why they were there.</p>
+				<p>Each of them had received the same message, worded differently but meaning the same thing: <em>Show up if you're tired of being reduced to one version of yourself.</em> No further explanation. No promise of change. Just an invitation.</p>
+				<p>So they came. From different cities, backgrounds, timelines of life. People who had been told they were too much. Or not enough. Or late. Or early. Or wrong. People who had been praised once and punished forever after for the same trait. People who had learned to keep their heads down because standing out had consequences.</p>
+				<p>When they lined up, something strange happened. No one needed to ask questions. No one tried to dominate the space. The seriousness on their faces wasn't anger—it was recognition. The kind that comes when you realize your private thoughts aren't as private as you believed.</p>
+				<p>The camera hadn't started yet.</p>
+				<p>Still, no one moved.</p>
+				<p>A woman near the center remembered the last time she had spoken up and been called difficult. A man to her right remembered being applauded for the same words years earlier. Neither said anything. They didn't have to. The silence carried it.</p>
+				<p>Behind them, a younger boy stood straighter than he usually did. For once, he didn't feel like he was pretending to be older, braver, louder. For once, just existing felt sufficient.</p>
+				<p>When the shutter finally clicked, it captured none of their stories directly. It caught only faces—steady, unsmiling, human. But inside that single moment were hundreds of decisions: to stay, to face forward, to not dilute themselves for comfort.</p>
+				<p>Later, the image would be shared and misunderstood. People would call it staged, dramatic, empty. They would project meanings onto it that suited them.</p>
+				<p>But the people in the photograph would know the truth.</p>
+				<p>That this was the first time they had stood together without asking permission. That seriousness, sometimes, is not heaviness—it's clarity. And that looking forward, even without knowing what comes next, is an act of quiet rebellion.</p>
+				<p>And that was enough.</p>
+			<div class="narration-player" aria-label="Narration audio player">
+				<button class="narration-play-btn" id="narration-toggle" aria-label="Play narration">▶</button>
+				<div class="narration-progress-container">
+					<div class="narration-progress-bar" id="narration-progress-bar">
+						<div class="narration-progress-fill" id="narration-progress-fill"></div>
+					</div>
+					<span class="narration-time" id="narration-time">0:00</span>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+	<audio id="ambient" src="bgmusic.mp3" loop></audio>
+	<audio id="narration" src="narration.mp3"></audio>
+
+	<script>
+		const ambient = document.getElementById('ambient');
+		const musicToggle = document.getElementById('music-toggle');
+		const narration = document.getElementById('narration');
+		const narrationToggle = document.getElementById('narration-toggle');
+		const narrationProgressBar = document.getElementById('narration-progress-bar');
+		const narrationProgressFill = document.getElementById('narration-progress-fill');
+		const narrationTime = document.getElementById('narration-time');
+
+		// Background music autoplay at low volume
+		ambient.volume = 0.18;
+		const tryPlayAmbient = async () => {
+			try {
+				await ambient.play();
+				musicToggle.textContent = '♫';
+			} catch (err) {
+				musicToggle.textContent = '♫';
+			}
+		};
+		tryPlayAmbient();
+
+		// Music toggle
+		musicToggle.addEventListener('click', async () => {
+			if (ambient.paused) {
+				await ambient.play();
+				musicToggle.style.opacity = '1';
+			} else {
+				ambient.pause();
+				musicToggle.style.opacity = '0.6';
+			}
+		});
+
+		// Narration play/pause
+		narrationToggle.addEventListener('click', async () => {
+			if (narration.paused) {
+				await narration.play();
+				narrationToggle.textContent = '⏸';
+			} else {
+				narration.pause();
+				narrationToggle.textContent = '▶';
+			}
+		});
+
+		// Update progress bar and time
+		narration.addEventListener('timeupdate', () => {
+			const percent = (narration.currentTime / narration.duration) * 100;
+			narrationProgressFill.style.width = percent + '%';
+			const minutes = Math.floor(narration.currentTime / 60);
+			const seconds = Math.floor(narration.currentTime % 60);
+			narrationTime.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+		});
+
+		// Seek on progress bar click
+		narrationProgressBar.addEventListener('click', (e) => {
+			const rect = narrationProgressBar.getBoundingClientRect();
+			const percent = (e.clientX - rect.left) / rect.width;
+			narration.currentTime = percent * narration.duration;
+		});
+
+		// Reset on end
+		narration.addEventListener('ended', () => {
+			narrationToggle.textContent = '▶';
+		});
+	</script>
+</body>
+</html>
